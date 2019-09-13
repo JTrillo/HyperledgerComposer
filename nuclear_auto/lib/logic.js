@@ -534,7 +534,7 @@ async function addAutomaticAnalysis(txData) {
         newAnalysis.analysisDate = new Date();
         newAnalysis.method = 'AUTOMATIC';
         newAnalysis.indications = automaticAnalysis(txData.acqData, acq.tube.length);
-        let rs_acq = factory.newRelationship('ertis.uma.nuclear', 'Acquisition', txData.acqData);
+        let rs_acq = factory.newRelationship('ertis.uma.nuclear', 'Acquisition', txData.acqId);
         newAnalysis.acquisition = rs_acq;
         let rs_staff = factory.newRelationship('ertis.uma.nuclear', 'Staff', participantId);
         newAnalysis.analyst = rs_staff;
