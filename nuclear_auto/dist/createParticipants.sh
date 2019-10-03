@@ -21,3 +21,5 @@ composer card import -f llopis@nuclear_auto.card -c llopis@nuclear_auto
 composer participant add -d '{"$class": "ertis.uma.nuclear.Staff", "participantId": "trillo", "passport": "55555555E", "name": "Joaquín Trillo", "nationality": "Spanish", "role": "ADVANCED_ANALYST"}' -c admin-org1@nuclear_auto
 composer identity issue -u trillo -a ertis.uma.nuclear.Staff#trillo -c admin-org1@nuclear_auto
 composer card import -f trillo@nuclear_auto.card -c trillo@nuclear_auto
+
+rm *@nuclear_auto.card
