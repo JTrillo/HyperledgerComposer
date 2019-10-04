@@ -90,7 +90,7 @@ async function createWork(workData) {
 
         //Add the resource 'Work'
         let newWork = factory.newResource('ertis.uma.nuclear', 'Work', workData.workId);
-        newWork.workDate = new Date();
+        newWork.workDate = workData.workDate;
         newWork.state = "PLANNED";
         newWork.description = workData.description;
 
@@ -198,7 +198,7 @@ async function addCalibration(txData) {
         calibrationRegistry = registry;
 
         let newCal = factory.newResource('ertis.uma.nuclear', 'Calibration', txData.calId);
-        newCal.calDate = new Date();
+        newCal.calDate = txData.calDate;
         newCal.equipment = txData.equipment;
         newCal.primaryState = "NOT_ASSIGNED";
         newCal.secondaryState = "NOT_ASSIGNED";
@@ -419,7 +419,7 @@ async function addAcquisition(txData) {
 
         //New asset of type 'Acquisition'
         let newAcq = factory.newResource('ertis.uma.nuclear', 'Acquisition', txData.acqId);
-        newAcq.acqDate = new Date();
+        newAcq.acqDate = txData.acqDate;
         newAcq.filename = txData.filename;
         newAcq.hash = txData.hash;
         let rs_tube = factory.newRelationship('ertis.uma.nuclear', 'Tube', txData.tubeId);
@@ -491,7 +491,7 @@ async function addAnalysis(txData) {
         analysisRegistry = registry;
 
         let newAnalysis = factory.newResource('ertis.uma.nuclear', 'Analysis', txData.analysisId);
-        newAnalysis.analysisDate = new Date();
+        newAnalysis.analysisDate = txData.analysisDate;
         newAnalysis.method = 'MANUAL';
         newAnalysis.indications = txData.indications;
         let rs_acq = factory.newRelationship('ertis.uma.nuclear', 'Acquisition', txData.acqId);
@@ -531,7 +531,7 @@ async function addAutomaticAnalysis(txData) {
         let analysisRegistry = await getAssetRegistry('ertis.uma.nuclear.Analysis');
         let factory = getFactory();
         let newAnalysis = factory.newResource('ertis.uma.nuclear', 'Analysis', txData.analysisId);
-        newAnalysis.analysisDate = new Date();
+        newAnalysis.analysisDate = txData.analysisDate;
         newAnalysis.method = 'AUTOMATIC';
         newAnalysis.indications = automaticAnalysis(txData.acqData, acq.tube.length);
         let rs_acq = factory.newRelationship('ertis.uma.nuclear', 'Acquisition', txData.acqId);

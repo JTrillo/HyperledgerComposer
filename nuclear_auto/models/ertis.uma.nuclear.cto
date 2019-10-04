@@ -110,6 +110,7 @@ transaction RegisterTube { //ADMIN
 
 transaction CreateWork { //ADMIN
   o String workId
+  o DateTime workDate
   o String description
 }
 
@@ -119,6 +120,7 @@ transaction CloseWork { //ADMIN
 
 transaction AddCalibration { //ADMIN
   o String calId
+  o DateTime calDate
   o String equipment
   o String workId
 }
@@ -137,6 +139,7 @@ transaction EndCalibration { //ANALYST or ADVANCED_ANALYST
 
 transaction AddAcquisition { //ACQUISITOR
   o String acqId
+  o DateTime acqDate
   o String filename
   o String hash
   o String calId
@@ -145,12 +148,14 @@ transaction AddAcquisition { //ACQUISITOR
 
 transaction AddAnalysis { //ANALYST or ADVANCED_ANALYST
   o String analysisId
+  o DateTime analysisDate
   o String acqId
   o String[] indications
 }
 
 transaction AddAutomaticAnalysis { //AUTO
   o String analysisId
+  o DateTime analysisDate
   o String acqId
   o String[] acqData
 }
