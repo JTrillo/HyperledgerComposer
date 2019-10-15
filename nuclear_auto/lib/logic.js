@@ -586,7 +586,8 @@ function automaticAnalysis(data, tubeLength) {
     let indications = [];
     for (let i = 0; i < n_indications; i++) {
         let indication = "Detected ";
-        switch (Math.floor(Math.random() * 3)) {
+        //switch (Math.floor(Math.random() * 3)) {
+        switch (i % 3) {
             case 0:
                 indication += "fissure"; //Grieta
                 break;
@@ -598,7 +599,8 @@ function automaticAnalysis(data, tubeLength) {
                 break;
         }
         //Random position
-        let pos = Math.random() * tubeLength;
+        //let pos = Math.random() * tubeLength;
+        let pos = (i + 1) / (n_indications + 1) * tubeLength;
 
         indication += `, position ${pos}`;
 
