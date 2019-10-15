@@ -528,12 +528,15 @@ async function addAutomaticAnalysis(txData) {
         let acq = await acqRegistry.get(txData.acqId);
         if (!acq) throw new Error(`Acquisition with identifier ${txData.acqId} does not exist`);
 
+        let tubeRegistry = await getAssetRegistry('ertis.uma.nuclear.Tube');
+        let tube = await tubeRegistry.get(acq.tube.getIdentifier());
+
         let analysisRegistry = await getAssetRegistry('ertis.uma.nuclear.Analysis');
         let factory = getFactory();
         let newAnalysis = factory.newResource('ertis.uma.nuclear', 'Analysis', txData.analysisId);
         newAnalysis.analysisDate = txData.analysisDate;
         newAnalysis.method = 'AUTOMATIC';
-        newAnalysis.indications = automaticAnalysis(txData.acqData, acq.tube.length);
+        newAnalysis.indications = automaticAnalysis(txData.acqData, tube.length);
         let rs_acq = factory.newRelationship('ertis.uma.nuclear', 'Acquisition', txData.acqId);
         newAnalysis.acquisition = rs_acq;
         let rs_staff = factory.newRelationship('ertis.uma.nuclear', 'Staff', participantId);
@@ -581,7 +584,7 @@ function automaticAnalysis(data, tubeLength) {
     data.forEach((element) => {
         total += parseInt(element);
     });
-    let n_indications = Math.round(total / data.length) % 4;
+    let n_indications = Math.abs(total) % 4;
 
     let indications = [];
     for (let i = 0; i < n_indications; i++) {
